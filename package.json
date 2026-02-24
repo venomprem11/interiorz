@@ -1,0 +1,25 @@
+{
+  "scripts": {
+    "start": "npm run server",
+    "server": "cd server && npm start",
+    "client": "cd client && npm run dev",
+    "dev": "npx concurrently \"npm run server\" \"npm run client\"",
+    "seed": "cd server && node seed.js"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.24",
+    "concurrently": "^9.2.1",
+    "postcss": "^8.5.6",
+    "tailwindcss": "^4.2.0"
+  },
+  "dependencies": {
+    "axios": "^1.13.5",
+    "framer-motion": "^12.34.3",
+    "lucide-react": "^0.575.0",
+    "react-countup": "^6.5.3",
+    "react-router-dom": "^7.13.0",
+    "react-scroll": "^1.9.3",
+    "react-tilt": "^1.0.2",
+    "react-toastify": "^11.0.5"
+  }
+}
