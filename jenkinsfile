@@ -36,9 +36,8 @@ pipeline {
                     docker.image('node:20-alpine').inside {
                         withCredentials([string(credentialsId: 'VERCEL_TOKEN', variable: 'VERCEL_TOKEN')]) {
                             sh '''
-                            npm install -g vercel
                             cd client
-                            vercel --prod --token=$VERCEL_TOKEN --confirm
+                            sh 'npx vercel --prod --token=$VERCEL_TOKEN --yes'
                             '''
                         }
                     }
