@@ -1,0 +1,50 @@
+pipeline {
+    agent any
+
+    stages {
+
+        stage('Build Backend') {
+            steps {
+                script {
+                    docker.image('node:20').inside {
+                        sh '''
+                        cd server
+                        npm install
+                        '''
+                    }
+                }
+            }
+        }
+
+        stage('Build Frontend') {
+            steps {
+                script {
+                    docker.image('node:20').inside {
+                        sh '''
+                        cd client
+                        npm install
+                        npm run build
+                        '''
+                    }
+                }
+            }
+        }
+
+        stage('Deploy Frontend to Vercel') {
+            steps {
+                script {
+                    docker.image('node:20').inside {
+                        withCredentials([string(credentialsId: 'VERCEL_TOKEN', variable: 'VERCEL_TOKEN')]) {
+                            sh '''
+                            npm install -g vercel
+                            cd client
+                            vercel --prod --token=$VERCEL_TOKEN --confirm
+                            '''
+                        }
+                    }
+                }
+            }
+        }
+
+    }
+}
