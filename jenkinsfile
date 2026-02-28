@@ -37,7 +37,7 @@ pipeline {
                         withCredentials([string(credentialsId: 'VERCEL_TOKEN', variable: 'VERCEL_TOKEN')]) {
                             sh '''
                             cd client
-                            sh 'npx vercel --prod --token=$VERCEL_TOKEN --yes'
+                            npx vercel --prod --token=$VERCEL_TOKEN --yes
                             '''
                         }
                     }
