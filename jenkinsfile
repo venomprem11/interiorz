@@ -6,7 +6,7 @@ pipeline {
         stage('Build Backend') {
             steps {
                 script {
-                    docker.image('node:20').inside {
+                    docker.image('node:20-alpine').inside {
                         sh '''
                         cd server
                         npm install
@@ -19,7 +19,7 @@ pipeline {
         stage('Build Frontend') {
             steps {
                 script {
-                    docker.image('node:20').inside {
+                    docker.image('node:20-alpine').inside {
                         sh '''
                         cd client
                         npm install
@@ -33,7 +33,7 @@ pipeline {
         stage('Deploy Frontend to Vercel') {
             steps {
                 script {
-                    docker.image('node:20').inside {
+                    docker.image('node:20-alpine').inside {
                         withCredentials([string(credentialsId: 'VERCEL_TOKEN', variable: 'VERCEL_TOKEN')]) {
                             sh '''
                             npm install -g vercel
